@@ -9,6 +9,7 @@ Nombre del grupo:
 #include <LiquidCrystal_I2C.h>      // Biblioteca de pantalla LCD con I2C
 LiquidCrystal_I2C lcd(0x27, 16, 2); // Iniciar pantalla LCD, 16 caractares por línea y 2 líneas.
 #include <dht11.h>                  // Biblioteca Sensor de Temperatura + Humedad
+#include <Stepper.h>
 
 // INTERIOR
 #define LDR_PIN_EXT A1   // Pin analógico A0 para LDR
@@ -39,6 +40,10 @@ byte lum[8] = {
 byte hum[8] = {
     B00100, B00100, B01010, B01010, B10001, B10001, B10001, B01110};
 
+const int stepsPerRevolution = 2048; // Pasos por revolucion
+// Initializacion del stepper motor
+Stepper myStepper(stepsPerRevolution, 6, 9, 8, 10);
+
 void setup()
 {
     // put your setup code here, to run once:
@@ -56,20 +61,25 @@ void setup()
     lcd.createChar(1, temp);
     lcd.createChar(2, lum);
     lcd.createChar(3, hum);
+
+    pinMode(3, OUTPUT);
+    myStepper.setSpeed(300);
 }
 
 void loop()
 {
+    myStepper.step(2048);
+    analogWrite(3, 250);
+
     delay(2000);
 
     mode = mode + 1;
-    if (mode > 2)
+    if (mode > 3)
     {
         mode = 0;
     }
-
     Serial.print(mode);
-    //////////////////////////////////////
+
     // EXTERNO
 
     int value = analogRead(A0);
@@ -95,32 +105,20 @@ void loop()
     }
     if (mode == 2)
     {
-        pantalla_interior(lux_int, (float)DHT11.temperature, (float)DHT11.humidity);
+        pantalla_interior_1(lux_int, (float)DHT11.temperature);
     }
-
-    // if (T_obj = T_int){
-    // // perfe
-    // }
-    // if (T_obj < T_int && T_obj < T_ext){
-    // //
-    // }
-    // if (T_obj < T_int && T_obj > T_ext){
-    // // perfe
-    // }
-    // if (T_obj > T_int && T_obj < T_ext){
-    // // perfe
-    // }
-    // if (T_obj > T_int && T_obj > T_ext){
-    // // perfe
-    // }
+    if (mode == 3)
+    {
+        pantalla_interior_2(lux_int, (float)DHT11.humidity);
+    }
 }
 void exterior(int lux_ext)
 {
-    if (lux_ext > 650)
+    if (lux_ext > 500)
     {
         analogWrite(ledPin_ext, 0);
     }
-    if (lux_ext < 650)
+    if (lux_ext < 500)
     {
         analogWrite(ledPin_ext, 255);
     }
@@ -144,19 +142,16 @@ void exterior(int lux_ext)
     // }
     // }
 }
-void pantalla_interior(int lux_int, float T_int, float H_int)
+void pantalla_interior_1(int lux_int, float T_int)
 {
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Interior");
-    lcd.print(" ");
-    lcd.write(3);
-    lcd.print(T_int, 2);
-    lcd.print("%");
+
     lcd.setCursor(0, 1);
     lcd.write(1); //
     lcd.print(" ");
-    lcd.print(H_int, 2);
+    lcd.print(T_int, 2);
     lcd.print(" C ");
     lcd.write(2);
     lcd.print(" ");
@@ -164,6 +159,22 @@ void pantalla_interior(int lux_int, float T_int, float H_int)
     lcd.print(" lx");
     delay(1000);
 }
+
+void pantalla_interior_2(int lux_int, float H_int)
+{
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Interior");
+
+    lcd.setCursor(0, 1);
+    lcd.write(3); //
+    lcd.print(" ");
+    lcd.print(H_int, 2);
+    lcd.print(" % ");
+
+    delay(1000);
+}
+
 void pantalla_exterior(int lux_ext, int celsius)
 {
     lcd.clear();

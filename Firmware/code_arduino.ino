@@ -53,9 +53,7 @@ const int Rc = 10;   // Resistencia calibracion en KΩ
 #define LDR_EXT A1 // Sensor LDR Exterior
 
 // Leds para el control de iluminacion        //pdte
-#define LED0 4
-#define LED1 5
-#define LED2 6
+#define LED 6
 
 #define PIR 2 // Sensor PIR
 
@@ -77,7 +75,7 @@ Servo ventilacion;
 
 // Se crea el stepper para controlar las persianas
 
-const int stepsPerRevolution = 5000; // Pasos por revolucion
+const int stepsPerRevolution = 2048; // Pasos por revolucion
 // Initializacion del stepper motor
 Stepper persianas(stepsPerRevolution, 8, 10, 9, 11);
 
@@ -96,7 +94,7 @@ s_pid pid_temperature = {
     .err2 = 0};
 
 s_pid pid_light = {
-    .pid_constants = {.Kp = 0.6, .Ki = 0.01, .Kd = 0.2, .Ts = 0.1},
+    .pid_constants = {.Kp = 0.6, .Ki = 0.005, .Kd = 0, .Ts = 0.1},
     .cv = 0,
     .cv1 = 0,
     .err = 0,
@@ -108,7 +106,7 @@ s_pid pid_light = {
 // Variables para el timer de deteccion de presencia y para poner en modo bajo consumo
 
 int sleep = 1;
-unsigned long start_time_pir = 0, timer_time_pir = 10000;
+unsigned long start_time_pir = 0, timer_time_pir = 60000;
 
 // Variable para cambiar el estado de la pantalla y para su timer
 
@@ -149,14 +147,10 @@ void setup()
     pinMode(PIR, INPUT);
 
     // Inicializacion de los leds de iluminacion
-    pinMode(LED0, OUTPUT);
-    pinMode(LED1, OUTPUT);
-    pinMode(LED2, OUTPUT);
+    pinMode(LED, OUTPUT);
 
     // Apagamos inicialmente
-    digitalWrite(LED0, LOW);
-    digitalWrite(LED1, LOW);
-    digitalWrite(LED2, LOW);
+    digitalWrite(LED, LOW);
 
     // Comenzamos los sensores DHT
     // dht_int.begin();
@@ -183,6 +177,7 @@ void loop()
     float t_ext = readLM35();
     float light_int = illumination(analogRead(LDR_INT));
     float light_ext = illumination(analogRead(LDR_EXT));
+
     int pir_value = digitalRead(PIR); // Valor del sensor de presencia
 
     detect_presence(pir_value, &start_time_pir, timer_time_pir);
@@ -220,9 +215,7 @@ void loop()
 float readLM35()
 {
     long value = analogRead(LM35_ext);
-    float voltage = value * 5.0;
-    voltage /= 1024.0;
-    float temperatureC = (500 * value) / 1024;
+    float temperatureC = (5.0 * value * 100.0) / 1024.0;
     return temperatureC;
 }
 
@@ -395,41 +388,18 @@ void control_light(float light_int, float light_ext, float setpoint, s_pid *pid)
             Output = 400;
         if (Output < 0)
             Output = 0;
-        persianas.setSpeed(Output);
+        persianas.setSpeed(Output / 10);
         persianas.step(stepsPerRevolution);
     }
     else if (light_int < setpoint)
     {
-        if (Output > 400)
-            Output = 400;
+        if (Output > 255)
+            Output = 255;
         if (Output < 0)
             Output = 0;
         persianas.setSpeed(Output);
         persianas.step(stepsPerRevolution);
-        if (Output < 100)
-        {
-            digitalWrite(LED0, LOW);
-            digitalWrite(LED1, LOW);
-            digitalWrite(LED2, LOW);
-        }
-        else if (Output > 100 && Output < 200)
-        {
-            digitalWrite(LED0, HIGH);
-            digitalWrite(LED1, LOW);
-            digitalWrite(LED2, LOW);
-        }
-        else if (Output > 200 && Output < 300)
-        {
-            digitalWrite(LED0, HIGH);
-            digitalWrite(LED1, HIGH);
-            digitalWrite(LED2, LOW);
-        }
-        else if (Output > 300)
-        {
-            digitalWrite(LED0, HIGH);
-            digitalWrite(LED1, HIGH);
-            digitalWrite(LED2, HIGH);
-        }
+        analogWrite(LED, Output);
     }
 }
 

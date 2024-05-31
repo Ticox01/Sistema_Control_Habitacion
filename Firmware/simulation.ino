@@ -86,7 +86,7 @@ s_pid pid_temperature ={
 };
 
 s_pid pid_light ={
-    .pid_constants={.Kp=0.1,.Ki=0.005,.Kd=0,.Ts=0.1},
+    .pid_constants={.Kp=1,.Ki=0.1,.Kd=0.05,.Ts=0.1},
     .cv=0,.cv1=0,.err=0,.err1=0,.err2=0
 };
 

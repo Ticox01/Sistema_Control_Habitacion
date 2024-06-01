@@ -90,3 +90,5 @@ Para regular la iluminación tenemos los siguientes actuadores:
 # MONTAJE
 
 ## Introducción
+
+![Schematic](schematic.pdf)

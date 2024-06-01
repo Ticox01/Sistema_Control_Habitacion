@@ -81,6 +81,12 @@ Por otro lado, el montaje se divirá en las siguientes partes:
 <img src="doc/images/Parte_Exterior_montaje.PNG" alt="Esquema Exterior">
 </p>
 
+*Esquema General del montaje*
+<p align="center">
+<img src="doc/images/Parte_Todo_montaje.PNG" alt="Esquema Exterior">
+</p>
+
+
 ## Funcionamiento
 
 El sistema se va a encontrar en modo bajo consumo, hasta que detecte una presencia, cuando lo haga todo se pondrá a funcionar y en la pantalla LCD se irán mostrando diferentes pantallas cada 3 segundos, con información sobre temperatura interior y exterior, iluminación exterior e interior y con la iluminación y temperatura de consgina.

@@ -25,5 +25,5 @@ This document provides a list of components used in the project along with their
 | Breadboard         | Connection board               |                                                                                                       |                                  | 2   |
 
 ## Notes
-- All components are from the KS0505 STEM Starter Kit for Arduino unless otherwise specified.
+- All components are from the KS0505 STEM Starter Kit unless otherwise specified.
 - Ensure to connect each component to the correct pins as described to avoid any malfunction.

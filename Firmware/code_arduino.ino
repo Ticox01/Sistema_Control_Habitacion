@@ -52,7 +52,7 @@ const int Rc = 10;   // Resistencia calibracion en KΩ
 #define LDR_INT A2 // Sensor LDR Interior
 #define LDR_EXT A1 // Sensor LDR Exterior
 
-// Leds para el control de iluminacion        //pdte
+// Led gradual para el control de iluminacion
 #define LED 6
 
 #define PIR 2 // Sensor PIR
@@ -62,25 +62,21 @@ const int Rc = 10;   // Resistencia calibracion en KΩ
 #define COLS 16 // Columnas del LCD
 #define ROWS 2  // Filas del LCD
 
-// Inicializamos los sensores de DHT
-// #define DHTTYPE DHT11
-// DHT dht_int(DHTPIN_INT, DHTTYPE);
-
 // Inicializacion de pantalla LCD
 LiquidCrystal_I2C lcd(0x27, COLS, ROWS);
 
 // Se crea el servo para controlar la apertura y cierre de ventana
 Servo ventilacion;
-#define PIN_SERVO_VENTILACION 7 // Sensor PIR
+#define PIN_SERVO_VENTILACION 7 // Servo
 
 // Se crea el stepper para controlar las persianas
 
 const int stepsPerRevolution = 2048; // Pasos por revolucion
 // Initializacion del stepper motor
-Stepper persianas(stepsPerRevolution, 8, 10, 9, 11);
+Stepper persianas(stepsPerRevolution, 8, 10, 9, 11); // Pines stepper 8,9,10,11
 
 // Ventilador
-#define PIN_VENTILADOR_INT 3
+#define PIN_VENTILADOR_INT 3 // DC motor
 
 // PID variables
 float temperature_setpoint = 20;
@@ -116,13 +112,13 @@ unsigned long start_time_lcd = 0, timer_time_lcd = 3000;
 // Declaración de simbolos para LCD
 
 byte tem_icon[8] = {
-    B00100, B01010, B01010, B01010, B01010, B10001, B10001, B01110};
+    B00100, B01010, B01010, B01010, B01010, B10001, B10001, B01110}; // Icono de Temperatura
 byte house_icon[8] = {
-    B00000, B00100, B01110, B11111, B10001, B10101, B10101, B11111};
+    B00000, B00100, B01110, B11111, B10001, B10101, B10101, B11111}; // Icono casa para interior
 byte sun_icon[8] = {
-    B00000, B00000, B10101, B01110, B11111, B01110, B10101, B00000};
+    B00000, B00000, B10101, B01110, B11111, B01110, B10101, B00000}; // Icono sol para exterior
 byte lux_icon[8] = {
-    B00000, B01110, B10001, B10001, B10101, B01110, B01110, B00100};
+    B00000, B01110, B10001, B10001, B10101, B01110, B01110, B00100}; // Icono Iluminación
 
 // Predeclaración de las funciones
 void show_temperature(float t_int, float t_ext);
@@ -152,9 +148,6 @@ void setup()
     // Apagamos inicialmente
     digitalWrite(LED, LOW);
 
-    // Comenzamos los sensores DHT
-    // dht_int.begin();
-
     // Inicializacion de los servos en posicion cerrada (90º)
     ventilacion.attach(PIN_SERVO_VENTILACION);
     ventilacion.write(90);
@@ -170,11 +163,10 @@ void loop()
 {
 
     // Obtenemos valor de temperatura e iluminacion interior y exterior
-    int chk = DHT11.read(DHTPIN_INT);
+    int chk = DHT11.read(DHTPIN_INT); // Temperatura Exterior
     float t_int = (float)DHT11.temperature;
-    // float t_int = dht_int.readTemperature();
 
-    float t_ext = readLM35();
+    float t_ext = readLM35(); // Temperatura Exterior
     float light_int = illumination(analogRead(LDR_INT));
     float light_ext = illumination(analogRead(LDR_EXT));
 
@@ -188,7 +180,7 @@ void loop()
 
         lcd.noBacklight(); // Apagamos la Pantalla
 
-        // Mandamos a dormir al arduino hasta que se detecte presencia o se pulse el boon
+        // Ponemos en modo reposo al arduino hasta que se detecte presencia o se pulse el boon
         go_to_sleep();
 
         sleep = 0;
@@ -211,6 +203,8 @@ void loop()
 
     delay(100);
 }
+
+// Funcion para leer temperatura de LM35
 
 float readLM35()
 {

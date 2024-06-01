@@ -83,3 +83,10 @@ Para regular la iluminación tenemos los siguientes actuadores:
   Este LED se va a utilizar mediante PWM para iluminar más o menos dependiendo de si no tenemos iluminación suficiente exterior.
    
 ![Funcionamiento_iluminacion](doc/gifts/Funcionamiento_iluminacion.gif)
+
+
+
+---
+# MONTAJE
+
+## Introducción

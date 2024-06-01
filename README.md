@@ -94,6 +94,19 @@ Se realiza montaje de simulación, debido a la limitación de la simulación, en
 
 <p align="center">
 <img src="doc/images/SCHEMATIC.png">
-
 </p>
- // ![Schematic](doc/images/SCHEMATIC.png)
+
+
+<p align="center">
+<img src="doc/images/MONTAJE_LCD.PNG" alt="Pantalla LCD">
+</p>
+
+
+<p align="center">
+<img src="doc/images/MONTAJE_LUX.PNG"alt="Medidor LUX">
+</p>
+
+
+<p align="center">
+<img src="doc/images/MONTAJE_TEMPERATURA.PNG"alt="Medidor Temperatura">
+</p>

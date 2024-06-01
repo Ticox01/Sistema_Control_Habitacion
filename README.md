@@ -91,4 +91,4 @@ Para regular la iluminación tenemos los siguientes actuadores:
 
 ## Introducción
 
-![Schematic](schematic.pdf)
+![Schematic](doc/images/SCHEMATIC.png)

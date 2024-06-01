@@ -93,5 +93,7 @@ Para regular la iluminación tenemos los siguientes actuadores:
 Se realiza montaje de simulación, debido a la limitación de la simulación, encontraremos distintas diferencias entre ellos, se puede ver el esquematico del montaje en la siguiente imagen o en su defecto, en pdf [Schematic.pdf](schematic.pdf).
 
 <p align="center">
-![Schematic](doc/images/SCHEMATIC.png)
+<img src="doc/images/SCHEMATIC.png">
+
 </p>
+ // ![Schematic](doc/images/SCHEMATIC.png)

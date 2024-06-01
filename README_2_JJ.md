@@ -139,20 +139,3 @@ Para regular la iluminación tenemos los siguientes actuadores:
    
 ![Funcionamiento_iluminacion](doc/gifts/Funcionamiento_iluminacion.gif)
 
-
-
-
-## Pantalla Objetivo
-<p align="center">
-<img src="doc/images/MONTAJE_LCD.PNG" alt="Pantalla LCD">
-</p>
-
-## Pantalla Iluminación
-<p align="center">
-<img src="doc/images/MONTAJE_LUX.PNG"alt="Medidor LUX">
-</p>
-
-## Pantalla Pantalla Temperatura
-<p align="center">
-<img src="doc/images/MONTAJE_TEMPERATURA.PNG"alt="Medidor Temperatura">
-</p>

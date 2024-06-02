@@ -1,1 +1,1 @@
-[![Watch the video]]([https://youtu.be/vt5fpE0bzSY](https://youtu.be/NsltNeztmXQ))
+[![asciicast](https://asciinema.org/a/113463.png)](https://asciinema.org/a/113463)

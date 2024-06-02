@@ -83,7 +83,7 @@ Por otro lado, el montaje se divirá en las siguientes partes:
 
 *Esquema General del montaje*
 <p align="center">
-<img src="doc/images/Parte_Todo_montaje.PNG" alt="Esquema Exterior" style="transform:rotate(90deg);">
+<img src="doc/images/Parte_Todo_montaje.PNG" alt="Esquema Exterior" style="transform:rotate(180deg);">
 </p>
 
 

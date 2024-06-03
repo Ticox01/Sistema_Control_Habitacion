@@ -23,6 +23,7 @@ This document provides a list of components used in the project along with their
 | TIP122 Transistor  | Auxiliary DC motor             | Pin ground<br>Pin 130 Dc Motor<br>Pin 5V                                                               | KS0505 (STEM Starter Kit for Arduino) | 1   | ![TIP122 Transistor](../doc/images/COMPONENTS_TIP122.png) |
 | LM35 Temp Sensor   | Analog temperature sensor      | Pin A0                                                                                                 | KS0505 (STEM Starter Kit for Arduino) | 1   | ![LM35 Temp Sensor](../doc/images/COMPONENTS_LM35.png) |
 | Breadboard         | Connection board               |                                                                                                       |                                  | 2   | |
+| KEYESTUDIO Plus Development Board         | Arduino board               |                                                                                                       | KS0505 (STEM Starter Kit for Arduino) | 1   | ![Arduino Board](../doc/images/Arduino_board.PNG) |
 
 ## Notes
 - All components are from the KS0505 STEM Starter Kit unless otherwise specified.

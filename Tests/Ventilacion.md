@@ -7,6 +7,7 @@ Para la ventilación, se ha utilizado un motor DC conectado a un pequeño ventil
 El ventilador se encenderá cuando la temperatura interior, medida por el DHT11, supere la temperatura de consigna y, al mismo tiempo, sea inferior a la temperatura exterior. Por ejemplo, si la temperatura de consigna es 20°C, la temperatura interior es 30°C y la temperatura exterior es 35°C, el ventilador se encenderá gradualmente a medida que aumenten estas diferencias.
 
 Por otro lado, si la temperatura exterior es inferior a la temperatura interior, el servomotor se activará para enfriar la habitación.
+
 Acceder al video:
 
 [![Alt text](https://img.youtube.com/vi/aHB0db8aCqI/0.jpg)](https://www.youtube.com/watch?v=aHB0db8aCqI)

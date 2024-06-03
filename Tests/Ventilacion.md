@@ -9,4 +9,4 @@ El ventilador se encenderá cuando la temperatura interior, medida por el DHT11,
 Por otro lado, si la temperatura exterior es inferior a la temperatura interior, el servomotor se activará para enfriar la habitación.
 
 Acceder al Video: <br>
-[![Alt text](https://img.youtube.com/vi/aHB0db8aCqI/0.jpg)](https://www.youtube.com/watch?v=aHB0db8aCqI)
+[![Alt text](https://img.youtube.com/vi/NsltNeztmXQ/0.jpg)](https://www.youtube.com/watch?v=NsltNeztmXQ)
